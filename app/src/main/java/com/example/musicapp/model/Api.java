@@ -2,6 +2,7 @@ package com.example.musicapp.model;
 
 
 import com.example.musicapp.model.artistPojo.ArtistResponse;
+import com.example.musicapp.model.trackPojo.TrackResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -14,4 +15,10 @@ public interface Api {
     Call<ArtistResponse> getArtists(@Query("method") String method,
                                     @Query("api_key") String api_key,
                                     @Query("format") String json);
+
+    @GET("/2.0/?")
+    Call<TrackResponse> getTrack(@Query("method") String method,
+                                 @Query("api_key") String api_key,
+                                 @Query("format") String format);
+
 }
