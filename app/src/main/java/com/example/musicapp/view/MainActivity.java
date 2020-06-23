@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                 bt2.setVisibility(GONE);
                 bt3.setVisibility(GONE);
                 FragmentManager fm = getSupportFragmentManager();
-                TracksFragment tracksFragment = new TracksFragment();
+                TrackFragment tracksFragment = new TrackFragment();
                 fm.beginTransaction().replace(R.id.container, tracksFragment).addToBackStack(null).commit();
             }
         });
