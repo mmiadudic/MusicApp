@@ -91,11 +91,11 @@ public class ArtistFragment extends Fragment{
     }
 
 
-    public void onResume() {
+    /*public void onResume() {
         super.onResume();
         //set title bar
         ((MainActivity) getActivity()).setActionBarTitle("Top Artist");
-    }
+    }*/
 
 
 }
