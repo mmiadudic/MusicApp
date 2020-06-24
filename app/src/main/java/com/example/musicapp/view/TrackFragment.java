@@ -32,7 +32,7 @@ public class TrackFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_tracks, container, false);
+        View view = inflater.inflate(R.layout.fragment_track, container, false);
 
         trackRecyclerView = view.findViewById(R.id.recycler_track);
 
