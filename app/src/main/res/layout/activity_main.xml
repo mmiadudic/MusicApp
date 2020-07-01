@@ -1,54 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/container"
-    tools:context=".view.MainActivity">
+    android:layout_margin="15dp"
+    android:padding="10dp"
+    android:orientation="horizontal"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/cardview_light_background">
 
-    <RelativeLayout
+    <com.google.android.material.tabs.TabLayout
+
+        android:id="@+id/tabLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
-        <Button
-            android:id="@+id/button1"
+        android:background="@color/cardview_light_background">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabArtist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:padding="50dp"
-            android:textSize="20sp"
-            android:text="Artist"
-            />
+            android:text="Top Artist" />
 
-        <Button
-            android:id="@+id/button2"
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/tabTrack"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/button1"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:padding="50dp"
-            android:textSize="20sp"
-            android:text="Tracks"
-            />
+            android:text="Top Track" />
+    </com.google.android.material.tabs.TabLayout>
 
-        <Button
-            android:id="@+id/button3"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="match_parent"
+    <SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/tabLayout">
+
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/button2"
-            android:padding="50dp"
-            android:textSize="20sp"
-            android:text="Search"
-            />
-    </RelativeLayout>
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true">
 
+        </androidx.viewpager.widget.ViewPager>
+
+    </LinearLayout>
 
 </RelativeLayout>
