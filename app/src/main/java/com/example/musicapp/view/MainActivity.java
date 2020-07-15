@@ -2,26 +2,37 @@ package com.example.musicapp.view;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.musicapp.R;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
-public class MainActivity extends AppCompatActivity  {
+import static android.view.View.GONE;
+
+public class MainActivity extends AppCompatActivity {
+
+    Button bt;
+    TabLayout tabLayout;
+    View layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        tabLayout = findViewById(R.id.tabLayout);
         TabItem tabArtist = findViewById(R.id.tabArtist);
         TabItem tabTrack = findViewById(R.id.tabTrack);
-        SearchView searchView = findViewById(R.id.searchView);
+        SearchView searchView = findViewById(R.id.search_bar);
+        Button bt = (Button) findViewById(R.id.button);
+        layout = findViewById(R.id.info);
+
 
         final ViewPager viewPager = findViewById(R.id.viewPager);
 
@@ -29,7 +40,7 @@ public class MainActivity extends AppCompatActivity  {
 
         viewPager.setAdapter(pagerAdapter);
 
-        searchView.setOnSearchClickListener(new View.OnClickListener() {
+        /*searchView.setOnSearchClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -45,7 +56,7 @@ public class MainActivity extends AppCompatActivity  {
                 findViewById(R.id.viewPager).setVisibility(View.VISIBLE);
                 return false;
             }
-        });
+        });*/
 
 
 
@@ -66,6 +77,29 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
 
+        bt.setOnClickListener(v -> {
+            bt.setVisibility(GONE);
+            tabLayout.setVisibility(View.GONE);
+            findViewById(R.id.viewPager).setVisibility(View.GONE);
+
+            FragmentManager fm = getSupportFragmentManager();
+            SearchFragment searchFragment = new SearchFragment();
+            fm.beginTransaction().replace(R.id.container, searchFragment).addToBackStack(null).commit();
+
+        });
+    }
+
+    public void onBackPressedCallBack() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStackImmediate();
+            bt.setVisibility(View.VISIBLE);
+
+            tabLayout.setVisibility(View.VISIBLE);
+            findViewById(R.id.viewPager).setVisibility(View.VISIBLE);
+
+        } else {
+            super.onBackPressed();
+        }
     }
 
 }

@@ -1,7 +1,5 @@
 package com.example.musicapp.repositories;
 
-import android.util.Log;
-
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.musicapp.model.Api;
@@ -58,16 +56,12 @@ public class ArtistDataRepository {
 
                         artistResponseMutableLiveData.setValue(artistList);
                     }
-
                 }
-
             }
 
             @Override
             public void onFailure(Call<ArtistResponse> call, Throwable t) {
-                Log.d("Response", "usao sam u response" + t.getMessage() + call.isExecuted());
             }
-
         });
 
         return artistResponseMutableLiveData;

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,7 +32,6 @@ public class ArtistFragment extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_artist, container, false);
-
         artistRecyclerView = view.findViewById(R.id.recycler_artist);
 
         initArtistViewModel();
@@ -60,42 +58,25 @@ public class ArtistFragment extends Fragment{
 
     private void initArtistViewModel() {
 
-
         ArtistViewModel artistViewModel = new ViewModelProvider(this).get(ArtistViewModel.class);
+        artistViewModel.getArtistInfo().observe(getViewLifecycleOwner(), responseArtist -> {
+            if(responseArtist != null) {
+                List<Artist> artists = responseArtist;
 
-        artistViewModel.getArtistInfo().observe(getViewLifecycleOwner(), new Observer<List<Artist>>() {
-            @Override
-            public void onChanged(List<Artist> responseArtist) {
+                if (artists != null) {
 
-                if (responseArtist != null) {
-                    List<Artist> artists = responseArtist;
+                    for (Artist att : artists) {
+                        String name = att.name;
+                        String listeners = att.listeners;
+                        String playcount = att.playcount;
+                        List<Image> images = att.image;
 
-                    if (artists != null) {
-
-                        for (Artist att : artists) {
-                            String name = att.name;
-                            String listeners = att.listeners;
-                            String playcount = att.playcount;
-                            List<Image> images = att.image;
-
-
-                            artistItemData.add(new ArtistItemData(name, listeners, playcount, images.get(2).text));
-                        }
-
+                        artistItemData.add(new ArtistItemData(name, listeners, playcount, images.get(2).text));
                     }
                 }
                 artistAdaptor.notifyDataSetChanged();
             }
+            artistAdaptor.notifyDataSetChanged();
         });
-
     }
-
-
-    /*public void onResume() {
-        super.onResume();
-        //set title bar
-        ((MainActivity) getActivity()).setActionBarTitle("Top Artist");
-    }*/
-
-
 }
