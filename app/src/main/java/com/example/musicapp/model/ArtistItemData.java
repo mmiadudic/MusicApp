@@ -1,7 +1,7 @@
 package com.example.musicapp.model;
 
 public class ArtistItemData {
-    private String name;
+    public String name;
     private String listeners;
     private String playcount;
     private String image;

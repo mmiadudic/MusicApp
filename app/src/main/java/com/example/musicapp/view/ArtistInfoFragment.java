@@ -19,6 +19,7 @@ public class ArtistInfoFragment extends Fragment {
     TextView artistInfoName;
     TextView artistBio;
 
+
     public ArtistInfoFragment(String artistName) {
         this.artistName = artistName;
     }
@@ -26,6 +27,7 @@ public class ArtistInfoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        container.removeAllViews();
         View view = inflater.inflate(R.layout.fragment_artist_info, container, false);
 
         artistInfoName = view.findViewById(R.id.artist_info_name);

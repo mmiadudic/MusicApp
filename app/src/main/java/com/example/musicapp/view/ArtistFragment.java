@@ -22,7 +22,7 @@ import com.example.musicapp.viewmodel.ArtistViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArtistFragment extends Fragment{
+public class ArtistFragment extends Fragment implements ArtistAdaptor.OnArtistListener {
     private ArtistAdaptor artistAdaptor;
     private RecyclerView artistRecyclerView;
 
@@ -48,7 +48,7 @@ public class ArtistFragment extends Fragment{
 
     private void initArtistRecyclerView() {
         if (artistAdaptor == null) {
-            artistAdaptor = new ArtistAdaptor(artistItemData, this.getContext());
+            artistAdaptor = new ArtistAdaptor(artistItemData, this.getContext(), this);
             artistRecyclerView.setAdapter(artistAdaptor);
             artistRecyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         } else {
@@ -78,5 +78,12 @@ public class ArtistFragment extends Fragment{
             }
             artistAdaptor.notifyDataSetChanged();
         });
+    }
+    public void onArtistClicked(int position) {
+        ArtistInfoFragment myFragment = new ArtistInfoFragment(artistItemData.get(position).name);
+        requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container,
+                myFragment).commit();
+
+
     }
 }
